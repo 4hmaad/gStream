@@ -1,5 +1,6 @@
 import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
+import GoogleAuth from "./GoogleAuth"
 
 const Header = () => {
   return (
@@ -13,10 +14,7 @@ const Header = () => {
         All Streams
       </Link>
       <div class="item">
-        <button class="ui google plus button">
-          <i class="google plus icon" />
-          Sign in with Google
-        </button>
+        <GoogleAuth />
       </div>
     </div>
   )
