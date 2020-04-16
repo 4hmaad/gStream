@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import GoogleAuth from "./GoogleAuth"
 
@@ -13,7 +13,7 @@ const Header = () => {
       <Link className="right item" to="/">
         All Streams
       </Link>
-      <div class="item">
+      <div className="item">
         <GoogleAuth />
       </div>
     </div>
