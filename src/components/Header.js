@@ -13,6 +13,9 @@ const Header = () => {
       <Link className="right item" to="/">
         All Streams
       </Link>
+      <Link className="item" to="/streams/create">
+        Create New Stream
+      </Link>
       <div className="item">
         <GoogleAuth />
       </div>
