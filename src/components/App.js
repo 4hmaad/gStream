@@ -1,4 +1,5 @@
 import React from "react"
+import reducers from "../reducers"
 import { BrowserRouter, Route } from "react-router-dom"
 
 import StreamCreate from "./streams/StreamCreate"
@@ -9,6 +10,10 @@ import StreamList from "./streams/StreamList"
 import Header from "./Header"
 
 class App extends React.Component {
+  componentDidMount() {
+    console.log(reducers)
+  }
+
   pageOne() {
     return "Hello from main page."
   }
