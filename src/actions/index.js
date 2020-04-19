@@ -1,3 +1,5 @@
+import database from "../configs/FirebaseConfig"
+
 const signIn = userId => {
   return {
     type: "SIGN_IN",
@@ -12,4 +14,17 @@ const signOut = () => {
   }
 }
 
-export { signIn, signOut }
+const createStream = ({ title, description }) => async dispatch => {
+  await database
+    .collection("streams")
+    .doc(title)
+    .set({
+      title,
+      description,
+    })
+    .then(() => {
+      dispatch({ type: "CREATE_STREAM", payload: { title, description } })
+    })
+}
+
+export { signIn, signOut, createStream }
