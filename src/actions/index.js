@@ -32,8 +32,12 @@ const fetchUsers = () => dispatch => {
     .collection("users")
     .get()
     .then(data => {
-      dispatch({ type: "FETCH_USERS", payload: data })
+      const users = data.docs.map(doc => {
+        return doc.data()
+      })
+
+      dispatch({ type: "FETCH_USERS", payload: users })
     })
 }
 
-export { signIn, signOut, createStream }
+export { signIn, signOut, createStream, fetchUsers }

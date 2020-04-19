@@ -1,6 +1,6 @@
-export default (state = {}, action) => {
+export default (state = [], action) => {
   if (action.type === "CREATE_STREAM") {
-    return { ...state, stream: action.payload }
+    return [...state, action.payload]
   }
 
   return state
