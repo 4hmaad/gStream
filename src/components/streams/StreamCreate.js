@@ -32,6 +32,7 @@ class StreamCreate extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <form className="ui form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Field name="title" component={this.renderInput} label="Enter Stream Title" />
@@ -42,7 +43,7 @@ class StreamCreate extends React.Component {
   }
 }
 
-const validate = values => {
+const validateForm = values => {
   const errors = {}
 
   if (!values.title) {
@@ -55,13 +56,13 @@ const validate = values => {
   return errors
 }
 
-const mapStateToProps = state => {
-  return state
+const mapStateToProps = ({ streams }) => {
+  return { ...streams }
 }
 
 const formWrapped = reduxForm({
   form: "streamCreate",
-  validate,
+  validateForm,
 })(StreamCreate)
 
-export default connect(null, { createStream })(formWrapped)
+export default connect(mapStateToProps, { createStream })(formWrapped)

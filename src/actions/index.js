@@ -27,4 +27,13 @@ const createStream = ({ title, description }) => async dispatch => {
     })
 }
 
+const fetchUsers = () => dispatch => {
+  database
+    .collection("users")
+    .get()
+    .then(data => {
+      dispatch({ type: "FETCH_USERS", payload: data })
+    })
+}
+
 export { signIn, signOut, createStream }
