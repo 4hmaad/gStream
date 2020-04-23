@@ -40,4 +40,17 @@ const fetchUsers = () => dispatch => {
     })
 }
 
-export { signIn, signOut, createStream, fetchUsers }
+const fetchStreams = () => dispatch => {
+  database
+    .collection("streams")
+    .get()
+    .then(data => {
+      const users = data.docs.map(doc => {
+        return doc.data()
+      })
+
+      dispatch({ type: "FETCH_STREAMS", payload: users })
+    })
+}
+
+export { signIn, signOut, createStream, fetchStreams, fetchUsers }

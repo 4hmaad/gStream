@@ -7,13 +7,14 @@ import StreamEdit from "./streams/StreamEdit"
 import StreamDelete from "./streams/StreamDelete"
 import StreamList from "./streams/StreamList"
 
-import { fetchUsers } from "../actions"
+import { fetchUsers, fetchStreams } from "../actions"
 
 import Header from "./Header"
 
 class App extends React.Component {
   componentDidMount() {
     this.props.fetchUsers()
+    this.props.fetchStreams()
   }
 
   pageOne() {
@@ -42,4 +43,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   fetchUsers,
+  fetchStreams,
 })(App)
