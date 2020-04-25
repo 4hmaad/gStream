@@ -1,8 +1,10 @@
-.ui.stackable.menu {
-  margin-top: 2rem;
+.ui.secondary.menu {
   display: flex;
   justify-content: center;
-  margin-bottom: 6rem;
+  background-color: #fff;
+  box-shadow: 0 1px 2px #ccc;
+  margin: 4rem auto 6rem auto;
+  width: 50rem;
 }
 
 .ui.menu .item:hover,

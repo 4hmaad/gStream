@@ -1,7 +1,8 @@
 import React, { Fragment } from "react"
 import { BrowserRouter, Route } from "react-router-dom"
 import { connect } from "react-redux"
-import { Container, Grid, Card, Icon } from "semantic-ui-react"
+import { Container, Grid } from "semantic-ui-react"
+import "./styles/App.css"
 
 import StreamCreate from "./streams/StreamCreate"
 import StreamEdit from "./streams/StreamEdit"
@@ -30,14 +31,16 @@ class App extends React.Component {
             <Header />
 
             <Grid>
-              <Grid.Column width="12">
-                <Route path="/" exact component={StreamList} />
-                <Route path="/streams/create" component={StreamCreate} />
-                <Route path="/streams/edit" component={StreamEdit} />
-                <Route path="/streams/delete" component={StreamDelete} />
-              </Grid.Column>
+              <Grid.Row>
+                <Grid.Column width="12">
+                  <Route path="/" exact component={StreamList} />
+                  <Route path="/streams/create" component={StreamCreate} />
+                  <Route path="/streams/edit" component={StreamEdit} />
+                  <Route path="/streams/delete" component={StreamDelete} />
+                </Grid.Column>
 
-              <Grid.Column width="4"></Grid.Column>
+                <Grid.Column width="4"></Grid.Column>
+              </Grid.Row>
             </Grid>
           </Container>
         </BrowserRouter>

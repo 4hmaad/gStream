@@ -7,7 +7,7 @@ import "./styles/Header.css"
 const Header = () => {
   return (
     <Fragment>
-      <Menu stackable size="large">
+      <Menu secondary size="large">
         <Menu.Item>
           <Link to="/">Public Streams</Link>
         </Menu.Item>
