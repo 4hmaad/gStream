@@ -1,8 +1,13 @@
 import React from "react"
 import { reduxForm, Field } from "redux-form"
 import { connect } from "react-redux"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+import { Label, Form } from "semantic-ui-react"
 
 import { createStream } from "../../actions/index"
+
+const MySwal = withReactContent(Swal)
 
 class StreamCreate extends React.Component {
   constructor(props) {
@@ -13,7 +18,11 @@ class StreamCreate extends React.Component {
 
   renderError({ error, touched }) {
     if (touched && error) {
-      return <div className="ui pointing red basic label">{error}</div>
+      return (
+        <Label as="a" basic color="red" pointing>
+          {error}
+        </Label>
+      )
     }
   }
 
@@ -28,22 +37,25 @@ class StreamCreate extends React.Component {
   }
 
   onSubmit(values) {
-    this.props.createStream(values)
-  }
+    // this.props.createStream(values)
 
+    MySwal.fire({
+      title: values.title,
+      text: values.description,
+    })
+  }
   render() {
-    console.log(this.props)
     return (
-      <form className="ui form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+      <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Field name="title" component={this.renderInput} label="Enter Stream Title" />
         <Field name="description" component={this.renderInput} label="Enter the Description" />
         <button className="ui blue button">Submit</button>
-      </form>
+      </Form>
     )
   }
 }
 
-const validateForm = values => {
+const validate = values => {
   const errors = {}
 
   if (!values.title) {
@@ -62,7 +74,7 @@ const mapStateToProps = ({ streams }) => {
 
 const formWrapped = reduxForm({
   form: "streamCreate",
-  validateForm,
+  validate,
 })(StreamCreate)
 
 export default connect(mapStateToProps, { createStream })(formWrapped)
