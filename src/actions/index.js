@@ -68,8 +68,8 @@ const createStream = ({ title, description }) => async (dispatch, getState) => {
     })
 }
 
-const fetchUsers = () => dispatch => {
-  database
+const fetchUsers = () => async dispatch => {
+  await database
     .collection("users")
     .get()
     .then(data => {
@@ -77,6 +77,7 @@ const fetchUsers = () => dispatch => {
         return doc.data()
       })
 
+      console.log(data)
       dispatch({ type: "FETCH_USERS", payload: users })
     })
 }
@@ -85,12 +86,13 @@ const fetchStreams = () => dispatch => {
   database
     .collection("streams")
     .get()
-    .then(data => {
-      const users = data.docs.map(doc => {
-        return doc.data()
+    .then(querySnapshot => {
+      const streamsArray = []
+      querySnapshot.forEach(function (doc) {
+        streamsArray.push({ [doc.id]: doc.data() })
       })
 
-      dispatch({ type: "FETCH_STREAMS", payload: users })
+      dispatch({ type: "FETCH_STREAMS", payload: streamsArray })
     })
 }
 
