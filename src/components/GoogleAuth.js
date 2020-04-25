@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { signIn, signOut } from "./../actions"
+import { Button } from "semantic-ui-react"
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -37,25 +38,25 @@ class GoogleAuth extends React.Component {
   render() {
     if (this.props.auth.isSignedIn) {
       return (
-        <button onClick={this.onSignOutClick} className="ui google plus button">
+        <Button onClick={this.onSignOutClick} color="google plus">
           <i className="google plus icon" />
           Sign out
-        </button>
+        </Button>
       )
     } else if (this.props.auth.isSignedIn === false) {
       return (
-        <button onClick={this.onSignInClick} className="ui google plus button">
+        <Button onClick={this.onSignInClick} color="google plus">
           <i className="google plus icon" />
           Sign in with Google
-        </button>
+        </Button>
       )
     }
 
     return (
-      <button className="ui google plus button">
+      <Button color="google plus">
         <i className="google plus icon" />
         Loading...
-      </button>
+      </Button>
     )
   }
 }

@@ -1,6 +1,7 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { BrowserRouter, Route } from "react-router-dom"
 import { connect } from "react-redux"
+import { Container, Segment, Header as HeaderEl } from "semantic-ui-react"
 
 import StreamCreate from "./streams/StreamCreate"
 import StreamEdit from "./streams/StreamEdit"
@@ -23,15 +24,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="ui container">
+      <Fragment>
         <BrowserRouter>
-          <Header />
-          <Route path="/" component={StreamList} />
-          <Route path="/streams/create" component={StreamCreate} />
-          <Route path="/streams/edit" component={StreamEdit} />
-          <Route path="/streams/delete" component={StreamDelete} />
+          <Container>
+            <Header />
+
+            <Route path="/" exact component={StreamList} />
+            <Route path="/streams/create" component={StreamCreate} />
+            <Route path="/streams/edit" component={StreamEdit} />
+            <Route path="/streams/delete" component={StreamDelete} />
+          </Container>
         </BrowserRouter>
-      </div>
+      </Fragment>
     )
   }
 }

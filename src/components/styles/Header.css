@@ -1,0 +1,17 @@
+.ui.stackable.menu {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+
+.ui.menu .item:hover,
+.ui.menu .item:active {
+  background: #eee;
+}
+
+.ui.menu .item a,
+.ui.menu .item a:hover,
+.ui.menu .item a:active {
+  color: #000;
+}

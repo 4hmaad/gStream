@@ -1,0 +1,8 @@
+h3.ui.header {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.ui.fluid.card {
+  margin-top: 2rem;
+}
