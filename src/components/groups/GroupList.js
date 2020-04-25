@@ -10,7 +10,8 @@ class GroupList extends React.Component {
           <Card.Content header="About Amy" />
           <Card.Content description="asdasdasdafsadfas dsf sadfsagsag dsfgsfafg s" />
           <Card.Content extra>
-            <Icon name="user" />4 Friends
+            <Icon name="user" />
+            20 Students
           </Card.Content>
         </Card>
       </Fragment>

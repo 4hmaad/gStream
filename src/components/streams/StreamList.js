@@ -1,7 +1,6 @@
 import React, { Fragment } from "react"
 import { Header as HeaderEl, Card } from "semantic-ui-react"
 import { Link } from "react-router-dom"
-import "../styles/StreamList.css"
 
 const StreamList = () => {
   return (
