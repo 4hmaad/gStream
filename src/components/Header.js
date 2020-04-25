@@ -7,9 +7,9 @@ import "./styles/Header.css"
 const Header = () => {
   return (
     <Fragment>
-      <Menu secondary size="large">
+      <Menu pointing secondary size="large">
         <Menu.Item>
-          <Link to="/">Public Streams</Link>
+          <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item name="features">
           <Link to="/streams/create">Create New Stream</Link>
