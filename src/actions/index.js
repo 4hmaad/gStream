@@ -31,6 +31,7 @@ const fetchUsers = () => async dispatch => {
 const fetchStreams = () => dispatch => {
   database
     .collection("streams")
+    .orderBy("date", "desc")
     .get()
     .then(querySnapshot => {
       const streamsArray = []
@@ -38,6 +39,7 @@ const fetchStreams = () => dispatch => {
         streamsArray.push({ [doc.id]: doc.data() })
       })
 
+      console.log(streamsArray)
       dispatch({ type: "FETCH_STREAMS", payload: streamsArray })
     })
 }
