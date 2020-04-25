@@ -3,11 +3,9 @@ import { reduxForm, Field } from "redux-form"
 import { connect } from "react-redux"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
-import { Label, Form } from "semantic-ui-react"
+import { Label, Form, Button, Header as HeaderEl } from "semantic-ui-react"
 
 import { createStream } from "../../actions/index"
-
-const MySwal = withReactContent(Swal)
 
 class StreamCreate extends React.Component {
   constructor(props) {
@@ -37,19 +35,17 @@ class StreamCreate extends React.Component {
   }
 
   onSubmit(values) {
-    // this.props.createStream(values)
-
-    MySwal.fire({
-      title: values.title,
-      text: values.description,
-    })
+    this.props.createStream(values)
   }
   render() {
     return (
       <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <HeaderEl as="h3" style={{ marginBottom: "2rem" }}>
+          Create a New Stream
+        </HeaderEl>
         <Field name="title" component={this.renderInput} label="Enter Stream Title" />
         <Field name="description" component={this.renderInput} label="Enter the Description" />
-        <button className="ui blue button">Submit</button>
+        <Button primary>Submit</Button>
       </Form>
     )
   }
