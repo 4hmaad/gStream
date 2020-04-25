@@ -57,7 +57,7 @@ class StreamCreate extends React.Component {
           title: "Stream created successfully",
         })
 
-        fetchStreams()
+        this.props.fetchStreams()
       })
       .catch(() => {
         alert.fire({
@@ -68,7 +68,7 @@ class StreamCreate extends React.Component {
   }
 
   onSubmit(values) {
-    this.props.createStream(values)
+    this.createStream(values)
   }
   render() {
     return (
@@ -106,4 +106,6 @@ const formWrapped = reduxForm({
   validate,
 })(StreamCreate)
 
-export default connect(mapStateToProps)(formWrapped)
+export default connect(mapStateToProps, {
+  fetchStreams,
+})(formWrapped)
