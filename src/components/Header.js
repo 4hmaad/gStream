@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
 import GoogleAuth from "./GoogleAuth"
-import { Menu } from "semantic-ui-react"
+import { Menu, Button, Header as HeaderEl } from "semantic-ui-react"
 
 const Header = () => {
   return (
@@ -11,10 +11,10 @@ const Header = () => {
           <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item name="features">
-          <Link to="/streams/create">Create New Stream</Link>
+          <Link to="/streams/create">My Groups</Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/groups/create">Create New Group</Link>
+          <Link to="/groups/create">Settings</Link>
         </Menu.Item>
         <Menu.Item>
           <GoogleAuth />

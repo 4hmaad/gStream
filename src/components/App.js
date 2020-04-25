@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { Container, Grid, Header as HeaderEl, Button } from "semantic-ui-react"
 
@@ -20,17 +20,27 @@ class App extends React.Component {
     this.props.fetchStreams()
   }
 
-  mainIntroText() {
+  mainIntroText = () => {
     return (
-      <Container style={{ margin: "8rem 0rem" }}>
-        <HeaderEl style={{ fontSize: "4.2rem", color: "#fff" }} as="h1">
+      <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+        <HeaderEl style={{}} as="h2">
           Welcome to gStream
         </HeaderEl>
-        <HeaderEl style={{ fontSize: "1.5rem", color: "#fff" }} as="h4">
-          A platform where teachers and students connect with each others
-        </HeaderEl>
-        <Button inverted> Create Group </Button>
-      </Container>
+
+        <div>
+          <Link to="/streams/create" style={{ marginRight: "1rem" }}>
+            <Button size="small" primary>
+              Create New Group
+            </Button>
+          </Link>
+
+          <Link to="/streams/create">
+            <Button size="small" secondary>
+              Create New Group
+            </Button>
+          </Link>
+        </div>
+      </div>
     )
   }
 
