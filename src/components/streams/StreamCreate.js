@@ -1,11 +1,16 @@
 import React from "react"
 import { reduxForm, Field } from "redux-form"
 import { connect } from "react-redux"
-import Swal from "sweetalert2"
-import withReactContent from "sweetalert2-react-content"
+
+/* Configs */
+import database from "../../configs/FirebaseConfig"
+import { alert } from "../../configs/SweetAlertConfig"
+
+/* Elements */
 import { Label, Form, Button, Header as HeaderEl } from "semantic-ui-react"
 
-import { createStream } from "../../actions/index"
+/* Action Creators */
+import { fetchStreams } from "../../actions/index"
 
 class StreamCreate extends React.Component {
   constructor(props) {
@@ -32,6 +37,34 @@ class StreamCreate extends React.Component {
         {this.renderError(meta)}
       </div>
     )
+  }
+
+  async createStream({ title, description }) {
+    const { userId } = this.props.auth
+    const date = new Date()
+
+    await database
+      .collection("streams")
+      .add({
+        title,
+        description,
+        userId,
+        date,
+      })
+      .then(() => {
+        alert.fire({
+          icon: "success",
+          title: "Stream created successfully",
+        })
+
+        fetchStreams()
+      })
+      .catch(() => {
+        alert.fire({
+          icon: "error",
+          title: "Something went wrong! try again",
+        })
+      })
   }
 
   onSubmit(values) {
@@ -64,8 +97,8 @@ const validate = values => {
   return errors
 }
 
-const mapStateToProps = ({ streams }) => {
-  return { ...streams }
+const mapStateToProps = ({ streams, auth }) => {
+  return { streams, auth }
 }
 
 const formWrapped = reduxForm({
@@ -73,4 +106,4 @@ const formWrapped = reduxForm({
   validate,
 })(StreamCreate)
 
-export default connect(mapStateToProps, { createStream })(formWrapped)
+export default connect(mapStateToProps)(formWrapped)
