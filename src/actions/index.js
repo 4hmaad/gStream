@@ -36,7 +36,8 @@ const fetchStreams = () => dispatch => {
     .then(querySnapshot => {
       const streamsArray = []
       querySnapshot.forEach(function (doc) {
-        streamsArray.push({ [doc.id]: doc.data() })
+        const id = doc.id
+        streamsArray.push({ ...doc.data(), id })
       })
 
       console.log(streamsArray)
