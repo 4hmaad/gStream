@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { connect } from "react-redux"
 import { Header as HeaderEl, List, Dimmer, Loader, Segment } from "semantic-ui-react"
 import { Link } from "react-router-dom"

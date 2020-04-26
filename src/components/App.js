@@ -1,14 +1,14 @@
 import React, { Fragment } from "react"
 import { BrowserRouter, Route, Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { Container, Grid, Header as HeaderEl, Button, Segment } from "semantic-ui-react"
+import { Container, Grid, Header as HeaderEl, Button } from "semantic-ui-react"
 
 import StreamCreate from "./streams/StreamCreate"
 import StreamEdit from "./streams/StreamEdit"
 import StreamDelete from "./streams/StreamDelete"
 import StreamList from "./streams/StreamList"
 
-import GroupList from "./groups/GroupList"
+import JoinGroup from "./groups/JoinGroup"
 
 import { fetchUsers, fetchStreams } from "../actions"
 
@@ -63,7 +63,7 @@ class App extends React.Component {
                   </Grid.Column>
 
                   <Grid.Column width="4">
-                    <Route path="/" exact component={GroupList} />
+                    <Route path="/" exact component={JoinGroup} />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
