@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
 import GoogleAuth from "./GoogleAuth"
-import { Menu, Button, Header as HeaderEl } from "semantic-ui-react"
+import { Menu } from "semantic-ui-react"
 
 const Header = () => {
   return (
