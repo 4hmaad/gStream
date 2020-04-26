@@ -7,7 +7,7 @@ import database from "../../configs/FirebaseConfig"
 import { alert } from "../../configs/SweetAlertConfig"
 
 /* Elements */
-import { Label, Form, Button, Header as HeaderEl } from "semantic-ui-react"
+import { Label, Form, Button, Header as HeaderEl, Segment } from "semantic-ui-react"
 
 /* Action Creators */
 import { fetchStreams } from "../../actions/index"
@@ -72,14 +72,16 @@ class StreamCreate extends React.Component {
   }
   render() {
     return (
-      <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <HeaderEl as="h3" style={{ marginBottom: "2rem" }}>
-          Create a New Stream
-        </HeaderEl>
-        <Field name="title" component={this.renderInput} label="Enter Stream Title" />
-        <Field name="description" component={this.renderInput} label="Enter the Description" />
-        <Button primary>Submit</Button>
-      </Form>
+      <Segment size="large">
+        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <HeaderEl as="h3" style={{ marginBottom: "2rem" }}>
+            Create a New Stream
+          </HeaderEl>
+          <Field name="title" component={this.renderInput} label="Enter Stream Title" />
+          <Field name="description" component={this.renderInput} label="Enter the Description" />
+          <Button primary>Submit</Button>
+        </Form>
+      </Segment>
     )
   }
 }

@@ -7,14 +7,14 @@ const Header = () => {
   return (
     <Fragment>
       <Menu pointing secondary size="large">
-        <Menu.Item>
-          <Link to="/">Home</Link>
+        <Menu.Item as={Link} to="/">
+          Home
         </Menu.Item>
-        <Menu.Item name="features">
-          <Link to="/streams/create">My Groups</Link>
+        <Menu.Item as={Link} to="/group/show" name="features">
+          My Groups
         </Menu.Item>
-        <Menu.Item>
-          <Link to="/groups/create">Settings</Link>
+        <Menu.Item as={Link} to="/settings">
+          Settings
         </Menu.Item>
         <Menu.Item>
           <GoogleAuth />
