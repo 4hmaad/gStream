@@ -23,22 +23,16 @@ class App extends React.Component {
   mainIntroText = () => {
     return (
       <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-        <HeaderEl style={{}} as="h2">
-          Welcome to gStream
-        </HeaderEl>
+        <HeaderEl as="h2">Welcome to gStream</HeaderEl>
 
         <div>
-          <Link to="/streams/create" style={{ marginRight: "1rem" }}>
-            <Button size="small" primary>
-              Create New Group
-            </Button>
-          </Link>
+          <Button as={Link} to="/stream/create" style={{ marginRight: "1rem" }} size="small" primary>
+            Go Live
+          </Button>
 
-          <Link to="/streams/create">
-            <Button size="small" secondary>
-              Create New Group
-            </Button>
-          </Link>
+          <Button as={Link} to="/group/create" size="small" secondary>
+            Create New Group
+          </Button>
         </div>
       </div>
     )
@@ -57,9 +51,9 @@ class App extends React.Component {
                 <Grid.Row>
                   <Grid.Column width="12">
                     <Route path="/" exact component={StreamList} />
-                    <Route path="/streams/create" component={StreamCreate} />
-                    <Route path="/streams/edit" component={StreamEdit} />
-                    <Route path="/streams/delete" component={StreamDelete} />
+                    <Route path="/stream/create" component={StreamCreate} />
+                    <Route path="/stream/edit" component={StreamEdit} />
+                    <Route path="/stream/delete" component={StreamDelete} />
                   </Grid.Column>
 
                   <Grid.Column width="4">
