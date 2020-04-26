@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { BrowserRouter, Route, Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { Container, Grid, Header as HeaderEl, Button } from "semantic-ui-react"
+import { Container, Grid, Header as HeaderEl, Button, Segment } from "semantic-ui-react"
 
 import StreamCreate from "./streams/StreamCreate"
 import StreamEdit from "./streams/StreamEdit"
