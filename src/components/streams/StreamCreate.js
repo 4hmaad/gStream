@@ -80,7 +80,7 @@ class StreamCreate extends React.Component {
   }
 }
 
-const validateForm = (values) => {
+const validate = (values) => {
   const errors = {};
 
   if (!values.title) {
@@ -99,7 +99,7 @@ const mapStateToProps = (state) => {
 
 const formWrapped = reduxForm({
   form: "streamCreate",
-  validateForm,
+  validate,
 })(StreamCreate);
 
 export default connect(mapStateToProps, {
