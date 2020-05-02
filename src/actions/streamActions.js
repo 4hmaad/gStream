@@ -1,5 +1,14 @@
 import database from "../configs/FirebaseConfig";
 
+/**
+ * @description The function returns another function abiding Redux middleware rule. The returned function
+ * then expects two parameters: dispatch and getState which it is supposed to receive when executed by middleware.
+ * When the middleware receives the returned function, it passes the two functions: dispatch and getState in parameters and invokes it.
+ *
+ * @param {string} values - The values of the form.
+ * @returns {Function} Another function abiding Redux middleware rule.
+ *
+ */
 const createStream = ({ title, description }) => (dispatch, getState) => {
   const { userId } = getState().auth;
   const date = new Date();
@@ -35,24 +44,16 @@ const createStream = ({ title, description }) => (dispatch, getState) => {
     );
 };
 
-const fetchStreams = () => async (dispatch) => {
-  await database
+const fetchStreams = () => (dispatch) => {
+  return database
     .collection("streams")
     .orderBy("date", "desc")
     .get()
     .then((querySnapshot) => {
-      const streamsArray = [];
-      querySnapshot.forEach(function (doc) {
-        const id = doc.id;
-        streamsArray.push({ ...doc.data(), id });
-      });
-
-      const streams = querySnapshot.docs.map((doc) => {
+      const streamsArray = querySnapshot.docs.map((doc) => {
         const id = doc.id;
         return { id, ...doc.data() };
       });
-
-      console.log(streams);
 
       dispatch({ type: "FETCH_STREAMS", payload: streamsArray });
     });
