@@ -1,5 +1,5 @@
 import React from "react"
-import { reduxForm, Field, submit } from "redux-form"
+import { reduxForm, Field } from "redux-form"
 import { connect } from "react-redux"
 
 /* Configs */
@@ -36,29 +36,12 @@ class StreamCreate extends React.Component {
     )
   }
 
-  renderSubmitButton() {
-    // if (this.state.formSubmitting) {
-    //   return (
-    //     <Button loading disabled primary>
-    //       Submit
-    //     </Button>
-    //   )
-    // }
-    const { invalid, submitting } = this.props
-    console.log(submitting)
-
-    return (
-      <Button primary disabled={submitting || invalid}>
-        Submit
-      </Button>
-    )
-  }
-
   onSubmit(values) {
-    this.props.createStream(values)
+    return this.props.createStream(values)
   }
 
   render() {
+    const { submitting, invalid } = this.props
     return (
       <Segment size="large" color="green">
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -67,7 +50,10 @@ class StreamCreate extends React.Component {
           </HeaderEl>
           <Field name="title" component={this.renderInput} label="Stream Title" />
           <Field name="description" component={this.renderInput} label="Stream Description" />
-          {this.renderSubmitButton()}
+          <Button primary disabled={submitting || invalid}>
+        Submit
+      </Button>
+          
         </Form>
       </Segment>
     )

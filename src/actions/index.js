@@ -1,3 +1,7 @@
+/* Libraries */
+import { startSubmit, stopSubmit } from "redux-form";
+
+/* Configs */
 import database from "../configs/FirebaseConfig"
 import { miniAlert } from "../configs/SweetAlertConfig"
 
@@ -33,7 +37,9 @@ const createStream = ({ title, description }) => (dispatch, getState) => {
   const { userId } = getState().auth
   const date = new Date()
 
-  database
+  startSubmit("streamCreate")
+
+  return database
     .collection("streams")
     .add({
       title,
@@ -60,7 +66,10 @@ const createStream = ({ title, description }) => (dispatch, getState) => {
             icon: "success",
             title: "Stream created successfully"
           })
+
+          stopSubmit("streamCreate")
         })
+        
     })
     .catch(() => {
       miniAlert.fire({
