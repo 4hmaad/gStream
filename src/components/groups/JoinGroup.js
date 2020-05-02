@@ -1,5 +1,5 @@
-import React from "react"
-import { Header as HeaderEl, Segment, Button, Form } from "semantic-ui-react"
+import React from "react";
+import { Header as HeaderEl, Segment, Button, Form } from "semantic-ui-react";
 
 class JoinGroup extends React.Component {
   render() {
@@ -11,8 +11,8 @@ class JoinGroup extends React.Component {
           <Button primary> Join </Button>
         </Form>
       </Segment>
-    )
+    );
   }
 }
 
-export default JoinGroup
+export default JoinGroup;

@@ -1,9 +1,9 @@
 export default (state = [], action) => {
   if (action.type === "FETCH_STREAMS") {
-    return action.payload
+    return action.payload;
   } else if (action.type === "CREATE_STREAM") {
-    return [action.payload, ...state]
+    return [action.payload, ...state];
   }
 
-  return state
-}
+  return state;
+};

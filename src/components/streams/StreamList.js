@@ -1,7 +1,14 @@
-import React, { Fragment } from "react"
-import { connect } from "react-redux"
-import { Header as HeaderEl, List, Dimmer, Loader, Segment, Button } from "semantic-ui-react"
-import { Link } from "react-router-dom"
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import {
+  Header as HeaderEl,
+  List,
+  Dimmer,
+  Loader,
+  Segment,
+  Button,
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 class StreamList extends React.Component {
   renderActionButtons = ({ id, userId }) => {
@@ -13,39 +20,41 @@ class StreamList extends React.Component {
           </Button>
           <Button data-id={id}>Delete</Button>
         </Button.Group>
-      )
+      );
     }
 
     return (
       <Button.Group style={{ marginTop: "1rem" }} size="small">
         <Button>Hide</Button>
       </Button.Group>
-    )
-  }
+    );
+  };
 
   renderList = () => {
     if (this.props.streams.length) {
-      return this.props.streams.map(stream => {
+      return this.props.streams.map((stream) => {
         return (
           <Fragment key={stream.id}>
             <List.Item style={{ padding: "1.2rem 0rem" }}>
               <List.Content as={Link} to={`/stream/${stream.id}`}>
                 <List.Header>{stream.title}</List.Header>
-                <List.Description style={{ marginTop: "0.5rem" }}>{stream.description}</List.Description>
+                <List.Description style={{ marginTop: "0.5rem" }}>
+                  {stream.description}
+                </List.Description>
               </List.Content>
               {this.renderActionButtons(stream)}
             </List.Item>
           </Fragment>
-        )
-      })
+        );
+      });
     } else {
       return (
         <Dimmer active inverted>
           <Loader />
         </Dimmer>
-      )
+      );
     }
-  }
+  };
 
   render() {
     return (
@@ -55,11 +64,11 @@ class StreamList extends React.Component {
           {this.renderList()}
         </List>
       </Segment>
-    )
+    );
   }
 }
-const mapStateToProps = state => {
-  return state
-}
+const mapStateToProps = (state) => {
+  return state;
+};
 
-export default connect(mapStateToProps)(StreamList)
+export default connect(mapStateToProps)(StreamList);

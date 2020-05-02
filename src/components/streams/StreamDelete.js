@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const StreamDelete = () => {
-  return <div> Delete Stream</div>
-}
+  return <div> Delete Stream</div>;
+};
 
-export default StreamDelete
+export default StreamDelete;

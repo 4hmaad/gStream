@@ -1,7 +1,7 @@
-import React, { Fragment } from "react"
-import { Link } from "react-router-dom"
-import GoogleAuth from "./GoogleAuth"
-import { Menu } from "semantic-ui-react"
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import GoogleAuth from "./GoogleAuth";
+import { Menu } from "semantic-ui-react";
 
 const Header = () => {
   return (
@@ -21,7 +21,7 @@ const Header = () => {
         </Menu.Item>
       </Menu>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
