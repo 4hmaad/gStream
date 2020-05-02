@@ -6,7 +6,7 @@ import { Menu } from "semantic-ui-react"
 const Header = () => {
   return (
     <Fragment>
-      <Menu pointing secondary size="large">
+      <Menu stackable secondary size="large">
         <Menu.Item as={Link} to="/">
           Home
         </Menu.Item>

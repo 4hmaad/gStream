@@ -9,5 +9,5 @@ export default combineReducers({
   auth: authReducer,
   form: formReducer,
   streams: streamReducer,
-  users: userReducer,
+  users: userReducer
 })

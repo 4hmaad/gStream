@@ -43,26 +43,29 @@ class App extends React.Component {
       <Fragment>
         <BrowserRouter>
           <Header />
-          <div className="appIntro">
-            <Route path="/" exact component={this.mainIntroText} />
+          <Route path="/" exact component={this.mainIntroText} />
 
-            <Container>
-              <Grid>
-                <Grid.Row>
-                  <Grid.Column width="12">
-                    <Route path="/" exact component={StreamList} />
-                    <Route path="/stream/create" component={StreamCreate} />
-                    <Route path="/stream/edit" component={StreamEdit} />
-                    <Route path="/stream/delete" component={StreamDelete} />
-                  </Grid.Column>
+          <Container>
+            <Grid>
+              <Grid.Row>
+                <Grid.Column mobile={16} tablet={10} computer={12} largeScreen={11}>
+                  <Route path="/" exact component={StreamList} />
+                </Grid.Column>
 
-                  <Grid.Column width="4">
-                    <Route path="/" exact component={JoinGroup} />
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            </Container>
-          </div>
+                <Grid.Column mobile={16} tablet={6} computer={4} largeScreen={5}>
+                  <Route path="/" exact component={JoinGroup} />
+                </Grid.Column>
+              </Grid.Row>
+
+              <Grid.Row>
+                <Grid.Column mobile={16} tablet={10} computer={12} largeScreen={11}>
+                  <Route path="/stream/create" component={StreamCreate} />
+                  <Route path="/stream/edit" component={StreamEdit} />
+                  <Route path="/stream/delete" component={StreamDelete} />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
         </BrowserRouter>
       </Fragment>
     )

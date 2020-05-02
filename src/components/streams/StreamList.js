@@ -1,20 +1,41 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { connect } from "react-redux"
-import { Header as HeaderEl, List, Dimmer, Loader, Segment } from "semantic-ui-react"
+import { Header as HeaderEl, List, Dimmer, Loader, Segment, Button } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
 class StreamList extends React.Component {
+  renderActionButtons = ({ id, userId }) => {
+    if (this.props.auth.userId === userId) {
+      return (
+        <Button.Group style={{ marginTop: "1rem" }} size="small">
+          <Button as={Link} to={`/stream/edit/${id}`} primary>
+            Edit
+          </Button>
+          <Button data-id={id}>Delete</Button>
+        </Button.Group>
+      )
+    }
+
+    return (
+      <Button.Group style={{ marginTop: "1rem" }} size="small">
+        <Button>Hide</Button>
+      </Button.Group>
+    )
+  }
+
   renderList = () => {
     if (this.props.streams.length) {
-      console.log("hashas")
       return this.props.streams.map(stream => {
         return (
-          <List.Item style={{ padding: "1.2rem 0rem" }} as={Link} to={`/stream/${stream.id}`}>
-            <List.Content>
-              <List.Header>{stream.title}</List.Header>
-              <List.Description as="a">{stream.description}</List.Description>
-            </List.Content>
-          </List.Item>
+          <Fragment key={stream.id}>
+            <List.Item style={{ padding: "1.2rem 0rem" }}>
+              <List.Content as={Link} to={`/stream/${stream.id}`}>
+                <List.Header>{stream.title}</List.Header>
+                <List.Description style={{ marginTop: "0.5rem" }}>{stream.description}</List.Description>
+              </List.Content>
+              {this.renderActionButtons(stream)}
+            </List.Item>
+          </Fragment>
         )
       })
     } else {
