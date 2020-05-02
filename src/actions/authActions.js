@@ -1,16 +1,15 @@
-const signIn = userId => {
-    return {
-        type: "SIGN_IN",
-        payload: userId
-    }
-}
-  
-const signOut = () => {
-    return {
-        type: "SIGN_OUT",
-        payload: null
-    }
-}
-  
+const signIn = (userId) => {
+  return {
+    type: "SIGN_IN",
+    payload: userId,
+  };
+};
 
-export { signIn, signOut }
+const signOut = () => {
+  return {
+    type: "SIGN_OUT",
+    payload: null,
+  };
+};
+
+export { signIn, signOut };
