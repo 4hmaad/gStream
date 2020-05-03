@@ -36,7 +36,7 @@ class StreamList extends React.Component {
         return (
           <Fragment key={stream.id}>
             <List.Item style={{ padding: "1.2rem 0rem" }}>
-              <List.Content as={Link} to={`/stream/${stream.id}`}>
+              <List.Content as={Link} to={`/stream/live/${stream.id}`}>
                 <List.Header>{stream.title}</List.Header>
                 <List.Description style={{ marginTop: "0.5rem" }}>
                   {stream.description}
