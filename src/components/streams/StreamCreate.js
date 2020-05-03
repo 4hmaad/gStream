@@ -13,6 +13,7 @@ import {
   Header as HeaderEl,
   Segment,
   Input,
+  Grid,
 } from "semantic-ui-react";
 
 /* Action Creators */
@@ -51,33 +52,35 @@ class StreamCreate extends React.Component {
         icon: "success",
         title: "Stream Created Successfully",
       });
-      history.push(`/stream/${data.id}`);
+      history.push(`/stream/live/${data.id}`);
     });
   }
 
   render() {
     const { submitting, invalid } = this.props;
     return (
-      <Segment size="large" color="green">
-        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          <HeaderEl as="h3" style={{ marginBottom: "2rem" }}>
-            Create a New Stream
-          </HeaderEl>
-          <Field
-            name="title"
-            component={this.renderInput}
-            label="Stream Title"
-          />
-          <Field
-            name="description"
-            component={this.renderInput}
-            label="Stream Description"
-          />
-          <Button primary disabled={submitting || invalid}>
-            Submit
-          </Button>
-        </Form>
-      </Segment>
+      <Grid.Column mobile={16} tablet={12} computer={11} largeScreen={10}>
+        <Segment size="large" color="green">
+          <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <HeaderEl as="h3" style={{ marginBottom: "2rem" }}>
+              Create a New Stream
+            </HeaderEl>
+            <Field
+              name="title"
+              component={this.renderInput}
+              label="Stream Title"
+            />
+            <Field
+              name="description"
+              component={this.renderInput}
+              label="Stream Description"
+            />
+            <Button primary disabled={submitting || invalid}>
+              Submit
+            </Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
     );
   }
 }
