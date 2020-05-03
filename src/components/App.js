@@ -8,6 +8,7 @@ import StreamCreate from "./streams/StreamCreate";
 import StreamEdit from "./streams/StreamEdit";
 import StreamDelete from "./streams/StreamDelete";
 import StreamList from "./streams/StreamList";
+import StreamPage from "./streams/StreamPage";
 
 import JoinGroup from "./groups/JoinGroup";
 
@@ -81,16 +82,10 @@ class App extends React.Component {
               </Grid.Row>
 
               <Grid.Row>
-                <Grid.Column
-                  mobile={16}
-                  tablet={10}
-                  computer={12}
-                  largeScreen={11}
-                >
-                  <Route path="/stream/create" component={StreamCreate} />
-                  <Route path="/stream/edit" component={StreamEdit} />
-                  <Route path="/stream/delete" component={StreamDelete} />
-                </Grid.Column>
+                <Route path="/stream/create" component={StreamCreate} />
+                <Route path="/stream/edit" component={StreamEdit} />
+                <Route path="/stream/delete" component={StreamDelete} />
+                <Route path="/stream/live/:id" exact component={StreamPage} />
               </Grid.Row>
             </Grid>
           </Container>
