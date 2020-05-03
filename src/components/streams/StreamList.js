@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 class StreamList extends React.Component {
   renderActionButtons = ({ id, userId }) => {
-    if (this.props.auth.userId === userId) {
+    if (this.props.auth.isSignedIn && this.props.auth.user.id === userId) {
       return (
         <Button.Group style={{ marginTop: "1rem" }} size="small">
           <Button as={Link} to={`/stream/edit/${id}`} primary>
