@@ -23,7 +23,7 @@ const createStream = ({ title, description }) => (dispatch, getState) => {
     })
     .then(
       () => {
-        database
+        return database
           .collection("streams")
           .where("userId", "==", userId)
           .orderBy("date", "desc")
@@ -36,6 +36,8 @@ const createStream = ({ title, description }) => (dispatch, getState) => {
             const newStream = { id, ...latestStreamData };
 
             dispatch({ type: "CREATE_STREAM", payload: newStream });
+
+            return newStream;
           });
       },
       (err) => {
