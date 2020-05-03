@@ -3,7 +3,8 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 
 /* Configs */
-import { miniAlert, alert } from "../../configs/SweetAlertConfig";
+import { miniAlert } from "../../configs/SweetAlertConfig";
+import history from "../../history";
 /* Elements */
 import {
   Label,
@@ -45,11 +46,12 @@ class StreamCreate extends React.Component {
   }
 
   onSubmit(values) {
-    return this.props.createStream(values).then(() => {
+    return this.props.createStream(values).then((data) => {
       miniAlert.fire({
         icon: "success",
         title: "Stream Created Successfully",
       });
+      history.push(`/stream/${data.id}`);
     });
   }
 
@@ -93,8 +95,9 @@ const validate = (values) => {
   return errors;
 };
 
-const mapStateToProps = (state) => {
-  return state;
+const mapStateToProps = ({ auth }) => {
+  let isSignedIn = auth.isSignedIn;
+  return { isSignedIn };
 };
 
 const formWrapped = reduxForm({
