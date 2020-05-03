@@ -12,13 +12,12 @@ import StreamPage from "./streams/StreamPage";
 
 import JoinGroup from "./groups/JoinGroup";
 
-import { fetchUsers, fetchStreams } from "../actions";
+import { fetchStreams } from "../actions";
 
 import Header from "./Header";
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.fetchUsers();
     this.props.fetchStreams();
   }
 
@@ -100,6 +99,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchUsers,
   fetchStreams,
 })(App);
