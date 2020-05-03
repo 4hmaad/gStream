@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
+import flv from "flv.js";
 
 /* Elements */
 import {
@@ -13,11 +14,47 @@ import {
 } from "semantic-ui-react";
 
 class StreamPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.showStreamPlayer();
+  }
+
+  componentDidUpdate() {
+    this.showStreamPlayer();
+  }
+
+  showStreamPlayer() {
+    if (
+      this.props.stream.isLoading === true ||
+      !this.props.stream.id ||
+      this.player
+    ) {
+      return false;
+    }
+
+    const id = this.props.stream.id;
+    this.player = flv.createPlayer({
+      type: "flv",
+      isLive: true,
+      url: `http://localhost:8000/live/${id}.flv`,
+    });
+
+    this.player.attachMediaElement(this.videoRef.current);
+    this.player.load();
+  }
+
   renderStream() {
     return (
       <Fragment>
         <HeaderEl size="huge"> {this.props.stream.title} </HeaderEl>
-        <Embed placeholder="/images/image-16by9.png" source="url" />
+
+        <video style={{ width: "100%" }} ref={this.videoRef} controls></video>
+
         <Divider />
 
         <HeaderEl>Description</HeaderEl>
