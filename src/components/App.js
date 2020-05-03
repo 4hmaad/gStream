@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Container, Grid, Header as HeaderEl, Button } from "semantic-ui-react";
+import history from "../history";
 
 import StreamCreate from "./streams/StreamCreate";
 import StreamEdit from "./streams/StreamEdit";
@@ -53,7 +54,7 @@ class App extends React.Component {
   render() {
     return (
       <Fragment>
-        <BrowserRouter>
+        <Router history={history}>
           <Header />
           <Route path="/" exact component={this.mainIntroText} />
 
@@ -93,7 +94,7 @@ class App extends React.Component {
               </Grid.Row>
             </Grid>
           </Container>
-        </BrowserRouter>
+        </Router>
       </Fragment>
     );
   }
