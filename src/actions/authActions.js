@@ -1,15 +1,20 @@
 import database from "../configs/FirebaseConfig";
 
-const signIn = (userData) => (dispatch) => {
+const signIn = (userProfile) => (dispatch) => {
   database
     .collection("users")
-    .doc(userData.id)
+    .doc(userProfile.id)
     .set({
-      ...userData,
+      ...userProfile,
     })
-    .then(() => {
-      dispatch({ type: "SIGN_IN", payload: userData });
-    });
+    .then(
+      () => {
+        dispatch({ type: "SIGN_IN", payload: userProfile });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
 };
 
 const signOut = () => {
