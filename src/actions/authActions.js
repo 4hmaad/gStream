@@ -1,6 +1,10 @@
+import { SIGNING_IN, SIGNED_IN, SIGN_OUT, AUTH_ERR } from "./actionTypes";
+
 import database from "../configs/FirebaseConfig";
 
 const signIn = (userProfile) => (dispatch) => {
+  dispatch({ type: SIGNING_IN });
+
   database
     .collection("users")
     .doc(userProfile.id)
@@ -9,17 +13,17 @@ const signIn = (userProfile) => (dispatch) => {
     })
     .then(
       () => {
-        dispatch({ type: "SIGN_IN", payload: userProfile });
+        dispatch({ type: SIGNED_IN, payload: userProfile });
       },
-      (err) => {
-        console.log(err);
+      (error) => {
+        dispatch({ type: AUTH_ERR, payload: error });
       }
     );
 };
 
 const signOut = () => {
   return {
-    type: "SIGN_OUT",
+    type: SIGN_OUT,
     payload: null,
   };
 };
