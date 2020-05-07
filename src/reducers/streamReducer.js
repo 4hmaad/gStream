@@ -3,7 +3,7 @@ import {
   FETCHING_FAILED_STREAMS,
   FETCHING_STREAMS,
   FETCHED_STREAMS,
-  FETCHING_FAILED_STREAM,
+  NOT_FOUND_STREAM,
   FETCHING_STREAM,
   FETCHED_STREAM,
 } from "../actions/actionTypes";
@@ -13,15 +13,15 @@ import {
  *
  * Stream: {
  *    streams: {
- *      isFetching: true || false || null,
+ *      fetching: true || false || null,
  *      data: [] || null
  *      error: string || null
  *    },
  *    loadedStream: {
- *      isFetching: true || false || null,
+ *      fetching: true || false || null,
  *      data: object || null,
  *      user: object || null
- *      error: string || null
+ *      found: true || false || null
  *    }
  * }
  *
@@ -29,35 +29,35 @@ import {
 
 const INITIAL_STATE = {
   streams: {
-    isFetching: null,
+    fetching: null,
     data: null,
     error: null,
   },
   loadedStream: {
-    isFetching: null,
+    fetching: null,
     data: null,
     user: null,
-    error: null,
+    found: null,
   },
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCHING_STREAMS:
-      return { ...state, streams: { isFetching: true } };
+      return { ...state, streams: { fetching: true } };
     case FETCHING_FAILED_STREAMS:
       return { ...state, streams: { error: action.payload } };
     case FETCHED_STREAMS:
-      return { ...state, streams: { isFetching: false, data: action.payload } };
+      return { ...state, streams: { fetching: false, data: action.payload } };
 
-    case FETCHING_FAILED_STREAM:
-      return { ...state, loadedStream: { error: action.payload } };
     case FETCHING_STREAM:
-      return { ...state, loadedStream: { isFetching: true } };
+      return { ...state, loadedStream: { fetching: true } };
+    case NOT_FOUND_STREAM:
+      return { ...state, loadedStream: { found: false, fetching: false } };
     case FETCHED_STREAM:
       return {
         ...state,
-        loadedStream: { data: action.data, user: action.user },
+        loadedStream: { data: action.data, user: action.user, found: true },
       };
 
     case CREATED_STREAM:

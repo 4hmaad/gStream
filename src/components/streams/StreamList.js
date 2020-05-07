@@ -31,8 +31,10 @@ class StreamList extends React.Component {
   };
 
   renderList = () => {
-    if (this.props.streams.length) {
-      return this.props.streams.map((stream) => {
+    if (this.props.streams.fetching === false && !this.props.streams.error) {
+      let streamsData = this.props.streams.data;
+
+      return streamsData.map((stream) => {
         return (
           <Fragment key={stream.id}>
             <List.Item style={{ padding: "1.2rem 0rem" }}>
@@ -67,8 +69,11 @@ class StreamList extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return state;
+
+const mapStateToProps = ({ auth, stream }) => {
+  let streams = stream.streams;
+
+  return { auth, streams };
 };
 
 export default connect(mapStateToProps)(StreamList);

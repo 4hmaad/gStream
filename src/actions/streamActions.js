@@ -3,7 +3,7 @@ import {
   FETCHING_FAILED_STREAMS,
   FETCHING_STREAMS,
   FETCHED_STREAMS,
-  FETCHING_FAILED_STREAM,
+  NOT_FOUND_STREAM,
   FETCHING_STREAM,
   FETCHED_STREAM,
 } from "./actionTypes";
@@ -85,7 +85,7 @@ let fetchStream = (streamId = null) => (dispatch, getState) => {
         });
       });
   } else {
-    dispatch({ type: FETCHING_FAILED_STREAM, payload: requestedStream });
+    dispatch({ type: NOT_FOUND_STREAM });
   }
 };
 

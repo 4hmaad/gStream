@@ -52,11 +52,14 @@ class StreamCreate extends React.Component {
         icon: "success",
         title: "Stream Created Successfully",
       });
-      history.push(`/stream/live/${data.id}`);
+      this.props.reset();
+
+      // history.push(`/stream/live/${data.id}`);
     });
   }
 
   render() {
+    console.log(this.props);
     const { submitting, invalid } = this.props;
     return (
       <Grid.Column mobile={16} tablet={12} computer={11} largeScreen={10}>
