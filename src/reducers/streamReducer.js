@@ -55,7 +55,10 @@ export default (state = INITIAL_STATE, action) => {
     case FETCHING_STREAM:
       return { ...state, loadedStream: { isFetching: true } };
     case FETCHED_STREAM:
-      return { ...state, loadedStream: { data: action.payload } };
+      return {
+        ...state,
+        loadedStream: { data: action.data, user: action.user },
+      };
 
     case CREATED_STREAM:
       let previousStreamData = state.streams.data;

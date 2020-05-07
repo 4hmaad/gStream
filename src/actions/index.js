@@ -1,4 +1,5 @@
-import { createStream, fetchStreams } from "./streamActions";
+import { createStream, fetchStreams, fetchStream } from "./streamActions";
 import { signIn, signOut } from "./authActions";
+import { fetchUser } from "./userActions";
 
-export { signIn, signOut, fetchStreams, createStream };
+export { signIn, signOut, fetchStreams, createStream, fetchUser, fetchStream };

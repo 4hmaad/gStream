@@ -62,15 +62,28 @@ let fetchStreams = () => (dispatch) => {
     );
 };
 
-let fetchStream = (streamId) => (dispatch, getState) => {
+let fetchStream = (streamId = null) => (dispatch, getState) => {
   dispatch({ type: FETCHING_STREAM });
 
-  let streamsData = getState.Stream.streams.data;
-
+  let streamsData = getState.stream.streams.data;
   let requestedStream = streamsData.find((stream) => stream.id === streamId);
 
   if (requestedStream) {
-    dispatch({ type: FETCHED_STREAM, payload: requestedStream });
+    let streamUserId = requestedStream.userId;
+
+    return database
+      .collection("users")
+      .where("id", "==", streamUserId)
+      .get()
+      .then((res) => {
+        const streamUserProfile = res.docs[0].data();
+
+        dispatch({
+          type: FETCHED_STREAM,
+          data: requestedStream,
+          user: streamUserProfile,
+        });
+      });
   } else {
     dispatch({ type: FETCHING_FAILED_STREAM, payload: requestedStream });
   }
