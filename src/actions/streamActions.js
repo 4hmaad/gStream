@@ -62,31 +62,38 @@ let fetchStreams = () => (dispatch) => {
     );
 };
 
-let fetchStream = (streamId = null) => (dispatch, getState) => {
+let fetchStream = (streamId = null) => (dispatch) => {
   dispatch({ type: FETCHING_STREAM });
 
-  let streamsData = getState.stream.streams.data;
-  let requestedStream = streamsData.find((stream) => stream.id === streamId);
+  database
+    .collection("streams")
+    .doc(streamId)
+    .get()
+    .then(
+      (querySnapShot) => {
+        if (querySnapShot.data() === undefined)
+          return dispatch({ type: NOT_FOUND_STREAM });
 
-  if (requestedStream) {
-    let streamUserId = requestedStream.userId;
+        let requestedStream = querySnapShot.data();
+        let streamUserId = requestedStream.userId;
 
-    return database
-      .collection("users")
-      .where("id", "==", streamUserId)
-      .get()
-      .then((res) => {
-        const streamUserProfile = res.docs[0].data();
+        database
+          .collection("users")
+          .where("id", "==", streamUserId)
+          .get()
+          .then((querySnapShot) => {
+            const streamUserProfile = querySnapShot.docs[0].data();
+            console.log(querySnapShot.docs[0]);
 
-        dispatch({
-          type: FETCHED_STREAM,
-          data: requestedStream,
-          user: streamUserProfile,
-        });
-      });
-  } else {
-    dispatch({ type: NOT_FOUND_STREAM });
-  }
+            dispatch({
+              type: FETCHED_STREAM,
+              data: requestedStream,
+              user: streamUserProfile,
+            });
+          });
+      },
+      (err) => console.error(err)
+    );
 };
 
 export { createStream, fetchStreams, fetchStream };

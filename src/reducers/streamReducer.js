@@ -57,7 +57,12 @@ export default (state = INITIAL_STATE, action) => {
     case FETCHED_STREAM:
       return {
         ...state,
-        loadedStream: { data: action.data, user: action.user, found: true },
+        loadedStream: {
+          fetching: false,
+          found: true,
+          data: action.data,
+          user: action.user,
+        },
       };
 
     case CREATED_STREAM:
