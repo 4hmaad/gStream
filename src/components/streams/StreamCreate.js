@@ -54,12 +54,11 @@ class StreamCreate extends React.Component {
       });
       this.props.reset();
 
-      // history.push(`/stream/live/${data.id}`);
+      history.push(`/stream/live/${data.id}`);
     });
   }
 
   render() {
-    console.log(this.props);
     const { submitting, invalid } = this.props;
     return (
       <Grid.Column mobile={16} tablet={12} computer={11} largeScreen={10}>
