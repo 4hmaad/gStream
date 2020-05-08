@@ -78,7 +78,7 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case DELETE_STREAM:
-      let newStreamsArray = removeStreamFromArray(
+      let newStreamsArray = filterStreamsArray(
         action.streamId,
         state.streams.data
       );
@@ -99,12 +99,12 @@ export default (state = INITIAL_STATE, action) => {
   }
 };
 
-let removeStreamFromArray = (streamId, streamsArray) => {
+let filterStreamsArray = (streamId, streamsArray) => {
   if (!streamsArray) return streamsArray;
   // eslint-disable-next-line array-callback-return
-  const newStreamsArray = streamsArray.map((stream) => {
+  const filteredStreamsArray = streamsArray.filter((stream) => {
     if (stream.id !== streamId) return stream;
   });
 
-  return newStreamsArray;
+  return filteredStreamsArray;
 };
