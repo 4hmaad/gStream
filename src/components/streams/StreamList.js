@@ -12,12 +12,22 @@ import {
 import { Link } from "react-router-dom";
 
 import { deleteStream } from "../../actions";
+
 import { miniAlert } from "../../configs/SweetAlertConfig";
 
 class StreamList extends React.Component {
   onDeleteStream = (event) => {
-    console.log(event);
-    // this.props.deleteStream()
+    miniAlert.fire({
+      title: "deleting...",
+    });
+
+    let streamId = event.currentTarget.dataset.id;
+    this.props.deleteStream(streamId).then(() => {
+      miniAlert.fire({
+        icon: "success",
+        title: "Stream Deleted",
+      });
+    });
   };
 
   renderActionButtons = ({ id, userId }) => {
@@ -27,7 +37,7 @@ class StreamList extends React.Component {
           <Button as={Link} to={`/stream/edit/${id}`} primary>
             Edit
           </Button>
-          <Button data-id={id} onClick={this.props.onDeleteStream}>
+          <Button data-id={id} onClick={this.onDeleteStream}>
             Delete
           </Button>
         </Button.Group>
@@ -70,6 +80,7 @@ class StreamList extends React.Component {
   };
 
   render() {
+    console.log("from streamList", this.props);
     return (
       <Segment color="blue" size="large">
         <HeaderEl as="h3"> Public Streams </HeaderEl>

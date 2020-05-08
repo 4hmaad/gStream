@@ -6,6 +6,7 @@ import {
   NOT_FOUND_STREAM,
   FETCHING_STREAM,
   FETCHED_STREAM,
+  DELETE_STREAM,
 } from "./actionTypes";
 
 import database from "../configs/FirebaseConfig";
@@ -100,7 +101,13 @@ let fetchStream = (streamId = null) => (dispatch) => {
 };
 
 let deleteStream = (streamId = null) => (dispatch) => {
-  return database.collection("streams").doc(streamId).delete();
+  return database
+    .collection("streams")
+    .doc(streamId)
+    .delete()
+    .then(() => {
+      dispatch({ type: DELETE_STREAM, streamId });
+    });
 };
 
-export { createStream, deleteStream, fetchStreams, fetchStream };
+export { createStream, fetchStreams, fetchStream, deleteStream };

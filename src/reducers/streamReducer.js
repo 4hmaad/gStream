@@ -6,6 +6,7 @@ import {
   NOT_FOUND_STREAM,
   FETCHING_STREAM,
   FETCHED_STREAM,
+  DELETE_STREAM,
 } from "../actions/actionTypes";
 
 /**
@@ -76,6 +77,12 @@ export default (state = INITIAL_STATE, action) => {
           user: action.user,
         },
       };
+    case DELETE_STREAM:
+      let newStreamsArray = removeStreamFromArray(
+        action.streamId,
+        state.streams.data
+      );
+      return { ...state, streams: { ...state.streams, data: newStreamsArray } };
 
     case CREATED_STREAM:
       let previousStreamData = state.streams.data;
@@ -90,4 +97,14 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
+};
+
+let removeStreamFromArray = (streamId, streamsArray) => {
+  if (!streamsArray) return streamsArray;
+  // eslint-disable-next-line array-callback-return
+  const newStreamsArray = streamsArray.map((stream) => {
+    if (stream.id !== streamId) return stream;
+  });
+
+  return newStreamsArray;
 };
