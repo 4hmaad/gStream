@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import flv from "flv.js";
 
+import { fetchStream } from "../../actions";
+
 /* Elements */
 import {
   Segment,
@@ -21,19 +23,16 @@ class StreamPage extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.stream.isLoading || !this.props.stream.isFound) return; // because we need userId from stream
-
-    this.createFlvPlayer();
+    let requestedStreamId = this.props.match.params.id;
+    this.props.fetchStream(requestedStreamId);
   }
 
   componentDidUpdate() {
-    if (this.props.stream.isLoading || !this.props.stream.isFound) return;
-
-    this.createFlvPlayer();
+    if (this.props.loadedStream.data)
+      this.createFlvPlayer(this.props.loadedStream.data.id);
   }
 
-  createFlvPlayer() {
-    const streamId = this.props.stream.id;
+  createFlvPlayer(streamId) {
     this.player = flv.createPlayer({
       type: "flv",
       url: `http://localhost:8000/live/${streamId}.flv`,
@@ -49,18 +48,21 @@ class StreamPage extends React.Component {
         <video style={{ width: "100%" }} ref={this.videoRef} controls></video>
 
         <Divider />
-        <HeaderEl size="large"> {this.props.stream.title} </HeaderEl>
+        <HeaderEl size="large"> {this.props.loadedStream.data.title} </HeaderEl>
 
         <Item>
-          <Item.Image size="tiny" src={`asd`} />
-
           <Item.Content>
-            <Item.Header>Ahmad Khan</Item.Header>
+            <Item.Image
+              size="tiny"
+              src={this.props.loadedStream.user.imageUrl}
+            />
+
+            <Item.Header> {this.props.loadedStream.user.fullName} </Item.Header>
           </Item.Content>
         </Item>
 
         <HeaderEl>Description</HeaderEl>
-        <p>{this.props.stream.description}</p>
+        <p>{this.props.loadedStream.data.description}</p>
       </Fragment>
     );
   }
@@ -78,9 +80,15 @@ class StreamPage extends React.Component {
   }
 
   renderContent = () => {
-    if (this.props.stream.isLoading === false && this.props.stream.isFound) {
+    if (
+      this.props.loadedStream.fetching === false &&
+      this.props.loadedStream.found
+    ) {
       return this.showStream();
-    } else if (this.props.stream.isLoading === false && !this.props.stream.id) {
+    } else if (
+      this.props.loadedStream.fetching === false &&
+      !this.props.loadedStream.found
+    ) {
       return this.showError();
     }
 
@@ -99,18 +107,10 @@ class StreamPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ streams, auth, users }, { match }) => {
-  if (streams.length) {
-    const stream = streams.find((stream) => stream.id === match.params.id);
-    const isStreamFound = stream ? true : false;
-    return {
-      stream: { ...stream, isLoading: false, isFound: isStreamFound },
-      auth,
-      users,
-    };
-  }
+const mapStateToProps = ({ stream }) => {
+  let loadedStream = stream.loadedStream;
 
-  return { stream: { isLoading: true, isFound: null } };
+  return { loadedStream };
 };
 
-export default connect(mapStateToProps)(StreamPage);
+export default connect(mapStateToProps, { fetchStream })(StreamPage);
