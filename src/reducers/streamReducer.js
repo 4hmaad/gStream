@@ -44,16 +44,28 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCHING_STREAMS:
-      return { ...state, streams: { fetching: true } };
+      return { ...state, streams: { ...state.streams, fetching: true } };
     case FETCHING_FAILED_STREAMS:
-      return { ...state, streams: { error: action.payload } };
+      return {
+        ...state,
+        streams: { ...state.streams, error: action.payload, fetching: false },
+      };
     case FETCHED_STREAMS:
-      return { ...state, streams: { fetching: false, data: action.payload } };
+      return {
+        ...state,
+        streams: { ...state.streams, fetching: false, data: action.payload },
+      };
 
     case FETCHING_STREAM:
-      return { ...state, loadedStream: { fetching: true } };
+      return {
+        ...state,
+        loadedStream: { ...state.loadedStream, fetching: true },
+      };
     case NOT_FOUND_STREAM:
-      return { ...state, loadedStream: { found: false, fetching: false } };
+      return {
+        ...state,
+        loadedStream: { ...state.loadedStream, found: false, fetching: false },
+      };
     case FETCHED_STREAM:
       return {
         ...state,
@@ -70,9 +82,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         streams: {
+          ...state.streams,
           data: [action.payload, ...previousStreamData],
-          fetching: false,
-          error: null,
         },
       };
 

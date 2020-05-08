@@ -7,7 +7,7 @@ import { fetchStream } from "../../actions";
 /* Elements */
 import {
   Segment,
-  Item,
+  Feed,
   Grid,
   Header as HeaderEl,
   Loader,
@@ -43,6 +43,8 @@ class StreamPage extends React.Component {
   }
 
   showStream() {
+    let streamUserProfile = this.props.loadedStream.user;
+
     return (
       <Fragment>
         <video style={{ width: "100%" }} ref={this.videoRef} controls></video>
@@ -50,16 +52,16 @@ class StreamPage extends React.Component {
         <Divider />
         <HeaderEl size="large"> {this.props.loadedStream.data.title} </HeaderEl>
 
-        <Item>
-          <Item.Content>
-            <Item.Image
-              size="tiny"
-              src={this.props.loadedStream.user.imageUrl}
-            />
-
-            <Item.Header> {this.props.loadedStream.user.fullName} </Item.Header>
-          </Item.Content>
-        </Item>
+        <Feed style={{ marginTop: "2rem" }}>
+          <Feed.Event>
+            <Feed.Label image={streamUserProfile.imageUrl} />
+            <Feed.Content>
+              <Feed.Summary>
+                <a> {streamUserProfile.fullName}</a> started this livestream.
+              </Feed.Summary>
+            </Feed.Content>
+          </Feed.Event>
+        </Feed>
 
         <HeaderEl>Description</HeaderEl>
         <p>{this.props.loadedStream.data.description}</p>
