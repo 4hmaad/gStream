@@ -17,7 +17,7 @@ import {
 } from "semantic-ui-react";
 
 /* Action Creators */
-import { createStream } from "../../actions/index";
+import { createStream, fetchStream } from "../../actions/index";
 
 class StreamCreate extends React.Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class StreamCreate extends React.Component {
         title: "Stream Created Successfully",
       });
       this.props.reset();
-
+      this.props.fetchStream(data.id);
       history.push(`/stream/live/${data.id}`);
     });
   }
@@ -112,4 +112,5 @@ const formWrapped = reduxForm({
 
 export default connect(mapStateToProps, {
   createStream,
+  fetchStream,
 })(formWrapped);

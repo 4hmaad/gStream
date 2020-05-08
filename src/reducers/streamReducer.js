@@ -59,12 +59,12 @@ export default (state = INITIAL_STATE, action) => {
     case FETCHING_STREAM:
       return {
         ...state,
-        loadedStream: { ...state.loadedStream, fetching: true },
+        loadedStream: { fetching: true, found: null, data: null },
       };
     case NOT_FOUND_STREAM:
       return {
         ...state,
-        loadedStream: { ...state.loadedStream, found: false, fetching: false },
+        loadedStream: { found: false, fetching: false, data: null },
       };
     case FETCHED_STREAM:
       return {

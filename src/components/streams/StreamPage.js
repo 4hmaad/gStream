@@ -20,11 +20,16 @@ class StreamPage extends React.Component {
     super(props);
 
     this.videoRef = React.createRef();
+    this.requestedStreamId = this.props.match.params.id;
   }
 
   componentDidMount() {
-    let requestedStreamId = this.props.match.params.id;
-    this.props.fetchStream(requestedStreamId);
+    if (this.props.loadedStream.data) {
+      if (this.props.loadedStream.data.id !== this.requestedStreamId)
+        this.props.fetchStream(this.requestedStreamId);
+    } else if (!this.props.loadedStream.fetching) {
+      this.props.fetchStream(this.requestedStreamId);
+    }
   }
 
   componentDidUpdate() {
