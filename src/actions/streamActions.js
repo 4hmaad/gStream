@@ -99,4 +99,8 @@ let fetchStream = (streamId = null) => (dispatch) => {
     );
 };
 
-export { createStream, fetchStreams, fetchStream };
+let deleteStream = (streamId = null) => (dispatch) => {
+  return database.collection("streams").doc(streamId).delete();
+};
+
+export { createStream, deleteStream, fetchStreams, fetchStream };

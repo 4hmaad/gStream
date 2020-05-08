@@ -3,11 +3,11 @@ body {
   background-color: #f2f8ff;
 }
 
-/* @media (min-width: 1200px) {
+@media (max-width: 37.5em) {
   html {
-    font-size: 95%;
+    font-size: 65%;
   }
-} */
+}
 
 .ui.grid {
   justify-content: center;
@@ -17,12 +17,12 @@ body {
   display: flex;
   justify-content: center;
   background-color: #fff;
-  width: 45rem;
+  max-width: 45rem;
   justify-content: center;
   margin: 3rem auto;
   border: 1px solid #eceff1;
   border-radius: 8px;
-  box-shadow: -2px 4px rgba(29, 84, 180, 0.1);
+  box-shadow: -2px 4px #1d54b41a;
 }
 
 .ui.menu .item a,
@@ -36,7 +36,7 @@ body {
 }
 .ui.segment {
   background: #fff;
-  padding: 2rem 4rem;
+  padding: 2rem 1.8rem;
   border-radius: 8px;
   border: 1px solid #eceff1;
   box-shadow: -2px 4px rgba(29, 84, 180, 0.1);

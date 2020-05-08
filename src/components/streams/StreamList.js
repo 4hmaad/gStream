@@ -8,9 +8,18 @@ import {
   Segment,
   Button,
 } from "semantic-ui-react";
+
 import { Link } from "react-router-dom";
 
+import { deleteStream } from "../../actions";
+import { miniAlert } from "../../configs/SweetAlertConfig";
+
 class StreamList extends React.Component {
+  onDeleteStream = (event) => {
+    console.log(event);
+    // this.props.deleteStream()
+  };
+
   renderActionButtons = ({ id, userId }) => {
     if (this.props.auth.isSignedIn && this.props.auth.user.id === userId) {
       return (
@@ -18,7 +27,9 @@ class StreamList extends React.Component {
           <Button as={Link} to={`/stream/edit/${id}`} primary>
             Edit
           </Button>
-          <Button data-id={id}>Delete</Button>
+          <Button data-id={id} onClick={this.props.onDeleteStream}>
+            Delete
+          </Button>
         </Button.Group>
       );
     }
@@ -76,4 +87,4 @@ const mapStateToProps = ({ auth, stream }) => {
   return { auth, streams };
 };
 
-export default connect(mapStateToProps)(StreamList);
+export default connect(mapStateToProps, { deleteStream })(StreamList);
