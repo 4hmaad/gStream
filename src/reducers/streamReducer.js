@@ -69,7 +69,11 @@ export default (state = INITIAL_STATE, action) => {
       let previousStreamData = state.streams.data;
       return {
         ...state,
-        streams: { data: [action.payload, ...previousStreamData] },
+        streams: {
+          data: [action.payload, ...previousStreamData],
+          fetching: false,
+          error: null,
+        },
       };
 
     default:
