@@ -3,7 +3,7 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 
 /* Configs */
-import { miniAlert } from "../../configs/SweetAlertConfig";
+import { miniAlert, alert } from "../../configs/SweetAlertConfig";
 import history from "../../history";
 /* Elements */
 import {
@@ -35,7 +35,6 @@ class StreamCreate extends React.Component {
       );
     }
   }
-
   renderInput({ input, label, meta }) {
     return (
       <Form.Field>
@@ -47,14 +46,44 @@ class StreamCreate extends React.Component {
   }
 
   onSubmit(values) {
-    return this.props.createStream(values).then((data) => {
-      miniAlert.fire({
-        icon: "success",
-        title: "Stream Created Successfully",
+    if (!this.props.auth.isSignedIn)
+      return miniAlert.fire({
+        icon: "error",
+        title: "Please sign in to create a stream",
       });
+
+    return this.props.createStream(values).then((data) => {
       this.props.reset();
       this.props.fetchStream(data.id);
-      history.push(`/stream/live/${data.id}`);
+
+      alert
+        .fire({
+          icon: "success",
+          title: "Stream Created Successfully",
+          html: (
+            <div style={{ textAlign: "left", marginTop: "0.6rem" }}>
+              <p>
+                Put the given <b>Server URL</b> and <b>Streaming Key</b> in your
+                software's custom streaming settings and start streaming.
+              </p>
+              <p>
+                <b>Server URL:</b> rtmp://localhost:1945/live
+              </p>
+              <p>
+                <b>Stream Key:</b> {data.id}
+              </p>
+              <span style={{ color: "red" }}>
+                <b>NOTE:</b> The stream key is a secret key.
+              </span>
+            </div>
+          ),
+          confirmButtonText: "Done",
+        })
+        .then((result) => {
+          if (result.value) {
+            history.push(`/stream/live/${data.id}`);
+          }
+        });
     });
   }
 
@@ -101,8 +130,7 @@ const validate = (values) => {
 };
 
 const mapStateToProps = ({ auth }) => {
-  let isSignedIn = auth.isSignedIn;
-  return { isSignedIn };
+  return { auth };
 };
 
 const formWrapped = reduxForm({

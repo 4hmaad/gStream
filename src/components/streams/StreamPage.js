@@ -27,6 +27,7 @@ class StreamPage extends React.Component {
     if (this.props.loadedStream.data) {
       if (this.props.loadedStream.data.id !== this.requestedStreamId)
         this.props.fetchStream(this.requestedStreamId);
+      else this.createFlvPlayer(this.props.loadedStream.data.id);
     } else if (!this.props.loadedStream.fetching) {
       this.props.fetchStream(this.requestedStreamId);
     }
@@ -40,11 +41,12 @@ class StreamPage extends React.Component {
   createFlvPlayer(streamId) {
     this.player = flv.createPlayer({
       type: "flv",
-      url: `http://localhost:8000/live/${streamId}.flv`,
+      url: `ws://localhost:9000/live/${streamId}.flv`,
     });
 
     this.player.attachMediaElement(this.videoRef.current);
     this.player.load();
+    this.player.play();
   }
 
   showStream() {
