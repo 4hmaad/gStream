@@ -13,21 +13,34 @@ import { Link } from "react-router-dom";
 
 import { deleteStream } from "../../actions";
 
-import { miniAlert } from "../../configs/SweetAlertConfig";
+import { miniAlert, alert } from "../../configs/SweetAlertConfig";
 
 class StreamList extends React.Component {
   onDeleteStream = (event) => {
-    miniAlert.fire({
-      title: "deleting...",
-    });
-
     let streamId = event.currentTarget.dataset.id;
-    this.props.deleteStream(streamId).then(() => {
-      miniAlert.fire({
-        icon: "success",
-        title: "Stream Deleted",
+
+    alert
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+      })
+      .then((result) => {
+        if (result.value) {
+          miniAlert.fire({
+            title: "deleting...",
+          });
+
+          this.props.deleteStream(streamId).then(() => {
+            miniAlert.fire({
+              icon: "success",
+              title: "Stream Deleted",
+            });
+          });
+        }
       });
-    });
   };
 
   renderActionButtons = ({ id, userId }) => {
